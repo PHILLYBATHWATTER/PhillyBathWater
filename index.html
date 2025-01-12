@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bath Water Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .product-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .price {
+            color: #e91e63;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .buy-button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .buy-button:hover {
+            background: #c2185b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Premium Bath Water Shop</h1>
+        <p>Experience luxury with our exclusive collection of bath water!</p>
+        
+        <div class="product-card">
+            <img src="bath-water-1.jpg" alt="Premium Bath Water" class="product-image">
+            <h2>Deluxe Bath Water</h2>
+            <p>Our signature premium bath water, collected from the finest baths.</p>
+            <p class="price">$29.99</p>
+            <button class="buy-button">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="bath-water-2.jpg" alt="Limited Edition Bath Water" class="product-image">
+            <h2>Limited Edition Bath Water</h2>
+            <p>Special edition bath water with rose petals and essential oils.</p>
+            <p class="price">$49.99</p>
+            <button class="buy-button">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="bath-water-3.jpg" alt="Collector's Bath Water" class="product-image">
+            <h2>Collector's Bath Water</h2>
+            <p>Rare, one-of-a-kind bath water for true connoisseurs.</p>
+            <p class="price">$99.99</p>
+            <button class="buy-button">Add to Cart</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.buy-button').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Item added to cart!');
+            });
+        });
+    </script>
+</body>
+</html>
