@@ -106,11 +106,55 @@
             margin: 10px auto;
             display: block;
         }
+        /* Add cart styles */
+        .cart-container {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* Add cart-specific styles */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            gap: 10px;
+        }
+        .quantity-btn {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .quantity {
+            font-size: 1.1em;
+            min-width: 30px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <button class="view-cart-button" onclick="window.location.href='file:///run/user/1000/doc/6ec791ae/cart.html'">View Cart</button>
+    <!-- Shop Container -->
+    <div class="container" id="shop-container">
+        <button class="view-cart-button" onclick="toggleView('cart')">View Cart</button>
         <h1>Premium Bath Water Shop</h1>
         <p>Experience luxury with our exclusive collection of bath water!</p>
         
@@ -141,12 +185,28 @@
         </div>
     </div>
 
+    <!-- Cart Container -->
+    <div class="cart-container" id="cart-container">
+        <button class="back-button" onclick="toggleView('shop')">Back to Shop</button>
+        <h1>Your Shopping Cart</h1>
+        <div id="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div id="empty-cart" class="empty-cart">
+            <p>Your cart is empty</p>
+        </div>
+        <div class="total">
+            Total: <span id="cart-total">$0.00</span>
+        </div>
+        <button class="checkout-button" onclick="checkout()">Proceed to Checkout</button>
+    </div>
+
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="popup">
         <img id="popup-image" class="popup-image">
         <h3>Item Added to Cart!</h3>
         <div class="popup-buttons">
-            <button class="view-cart-popup" onclick="window.location.href='file:///run/user/1000/doc/6ec791ae/cart.html'">View Cart</button>
+            <button class="view-cart-popup" onclick="window.location.href='cart.html'">View Cart</button>
             <button class="continue-shopping" onclick="closePopup()">Continue Shopping</button>
         </div>
     </div>
@@ -206,6 +266,34 @@
                 showPopup(productImage);
             });
         });
+
+        // Add new function to toggle between shop and cart views
+        function toggleView(view) {
+            const shopContainer = document.getElementById('shop-container');
+            const cartContainer = document.getElementById('cart-container');
+            
+            if (view === 'cart') {
+                shopContainer.style.display = 'none';
+                cartContainer.style.display = 'block';
+                displayCartItems();
+            } else {
+                shopContainer.style.display = 'block';
+                cartContainer.style.display = 'none';
+            }
+        }
+
+        // Add cart scripts
+        function displayCartItems() {
+            // ... existing displayCartItems function ...
+        }
+
+        function updateQuantity(itemName, change) {
+            // ... existing updateQuantity function ...
+        }
+
+        function checkout() {
+            // ... existing checkout function ...
+        }
     </script>
 </body>
 </html>
