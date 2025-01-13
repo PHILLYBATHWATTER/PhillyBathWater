@@ -180,6 +180,7 @@
         function checkout() {
             alert('Thank you for your purchase!');
             localStorage.removeItem('cartItems');
+            document.getElementById('cart-total').textContent = '$0.00';
             displayCartItems();
         }
 
