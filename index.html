@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart - Philly Bath Water</title>
+    <title>Philly Bath Water</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,6 +12,103 @@
             background-color: #f0f8ff;
         }
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .product-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .price {
+            color: #e91e63;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .buy-button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .buy-button:hover {
+            background: #c2185b;
+        }
+        .view-cart-button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .view-cart-button:hover {
+            background: #c2185b;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1001;
+            text-align: center;
+        }
+        .popup-buttons button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .view-cart-popup {
+            background: #e91e63;
+            color: white;
+        }
+        .continue-shopping {
+            background: #666;
+            color: white;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        .popup-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 10px auto;
+            display: block;
+        }
+        /* Add cart styles */
+        .cart-container {
+            display: none;
             max-width: 800px;
             margin: 0 auto;
             background: white;
@@ -19,6 +116,8 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+        
+        /* Add cart-specific styles */
         .cart-item {
             display: flex;
             align-items: center;
@@ -30,42 +129,6 @@
             height: 100px;
             object-fit: cover;
             margin-right: 20px;
-        }
-        .price {
-            color: #e91e63;
-            font-weight: bold;
-        }
-        .total {
-            margin-top: 20px;
-            text-align: right;
-            font-size: 1.2em;
-        }
-        .checkout-button {
-            background: #e91e63;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            float: right;
-            margin-top: 10px;
-        }
-        .checkout-button:hover {
-            background: #c2185b;
-        }
-        .empty-cart {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-        }
-        .back-button {
-            background: #666;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-bottom: 20px;
         }
         .quantity-controls {
             display: flex;
@@ -89,8 +152,40 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <button class="back-button" onclick="window.location.href='file:///run/user/1000/doc/3612214/index.html'">Back to Shop</button>
+    <!-- Shop Container -->
+    <div class="container" id="shop-container">
+        <button class="view-cart-button" onclick="window.location.href='file:///run/user/1000/doc/d1058b2d/cart.html'">View Cart</button>
+        <h1>Premium Bath Water Shop</h1>
+        <p>Experience luxury with our exclusive collection of bath water!</p>
+        
+        <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/71xo5ql1zTL.jpg" alt="Premium Bath Water" class="product-image">
+            <h2>Origial Bath Water</h2>
+            <p>Our signature premium bath water, collected from the finest baths.</p>
+            <p class="price">$14.99</p>
+            <button class="buy-button">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="https://eluxive.com/cdn/shop/products/DSC_0582_eca3d374-7daa-4cfe-98cb-d8311d61c2c1_1500x.jpg?v=1537830335" alt="Limited Edition Bath Water" class="product-image">
+            <h2>Limited Edition Bath Water</h2>
+            <p>Special edition bath water with rose petals and essential oils.</p>
+            <p class="price">$29.99</p>
+            <button class="buy-button">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/51surUt9v1L.jpg" alt="Collector's Bath Water" class="product-image">
+            <h2>Collector's Bath Water</h2>
+            <p>Rare, one-of-a-kind bath water for true connoisseurs.</p>
+            <p class="price">$34.99</p>
+            <button class="buy-button">Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Cart Container -->
+    <div class="cart-container" id="cart-container">
+        <button class="back-button" onclick="toggleView('shop')">Back to Shop</button>
         <h1>Your Shopping Cart</h1>
         <div id="cart-items">
             <!-- Cart items will be dynamically added here -->
@@ -104,87 +199,94 @@
         <button class="checkout-button" onclick="checkout()">Proceed to Checkout</button>
     </div>
 
-    <script>
-        function displayCartItems() {
-            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            const cartContainer = document.getElementById('cart-items');
-            const emptyCart = document.getElementById('empty-cart');
-            const totalElement = document.getElementById('cart-total');
-            let total = 0;
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <img id="popup-image" class="popup-image">
+        <h3>Item Added to Cart!</h3>
+        <div class="popup-buttons">
+            <button class="view-cart-popup" onclick="window.location.href='file:///run/user/1000/doc/d1058b2d/cart.html'">View Cart</button>
+            <button class="continue-shopping" onclick="closePopup()">Continue Shopping</button>
+        </div>
+    </div>
 
-            if (cartItems.length === 0) {
-                emptyCart.style.display = 'block';
-                cartContainer.style.display = 'none';
-                return;
+    <script>
+        function showPopup(productImage) {
+            document.getElementById('popup-image').src = productImage;
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        function addToCart(product) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            
+            // Check if product already exists in cart
+            const existingProduct = cartItems.find(item => 
+                item.name === product.name
+            );
+
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cartItems.push({
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
             }
 
-            emptyCart.style.display = 'none';
-            cartContainer.style.display = 'block';
-            cartContainer.innerHTML = '';
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        }
 
-            // Group items by name
-            const groupedItems = cartItems.reduce((acc, item) => {
-                if (!acc[item.name]) {
-                    acc[item.name] = {
-                        ...item,
-                        quantity: 0
-                    };
-                }
-                acc[item.name].quantity++;
-                return acc;
-            }, {});
+        document.querySelectorAll('.buy-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const productCard = button.closest('.product-card');
+                const productImage = productCard.querySelector('.product-image').src;
+                const productName = productCard.querySelector('h2').textContent;
+                const productPrice = parseFloat(productCard.querySelector('.price').textContent.replace('$', ''));
 
-            Object.values(groupedItems).forEach(item => {
-                const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item';
-                cartItem.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}">
-                    <div>
-                        <h3>${item.name}</h3>
-                        <p class="price">$${item.name === "Origial Bath Water" ? "14.99" : item.price}</p>
-                    </div>
-                    <div class="quantity-controls">
-                        <button class="quantity-btn" onclick="updateQuantity('${item.name}', -1)">-</button>
-                        <span class="quantity">${item.quantity}</span>
-                        <button class="quantity-btn" onclick="updateQuantity('${item.name}', 1)">+</button>
-                    </div>
-                `;
-                cartContainer.appendChild(cartItem);
-                total += parseFloat(item.name === "Origial Bath Water" ? 14.99 : item.price) * item.quantity;
+                addToCart({
+                    name: productName,
+                    price: productPrice,
+                    image: productImage
+                });
+
+                showPopup(productImage);
             });
+        });
 
-            totalElement.textContent = `$${total.toFixed(2)}`;
+        // Add new function to toggle between shop and cart views
+        function toggleView(view) {
+            const shopContainer = document.getElementById('shop-container');
+            const cartContainer = document.getElementById('cart-container');
+            
+            if (view === 'cart') {
+                shopContainer.style.display = 'none';
+                cartContainer.style.display = 'block';
+                displayCartItems();
+            } else {
+                shopContainer.style.display = 'block';
+                cartContainer.style.display = 'none';
+            }
+        }
+
+        // Add cart scripts
+        function displayCartItems() {
+            // ... existing displayCartItems function ...
         }
 
         function updateQuantity(itemName, change) {
-            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            
-            if (change < 0) {
-                // Remove one instance of the item
-                const index = cartItems.findIndex(item => item.name === itemName);
-                if (index !== -1) {
-                    cartItems.splice(index, 1);
-                }
-            } else {
-                // Add one more instance of the item
-                const item = cartItems.find(item => item.name === itemName);
-                if (item) {
-                    cartItems.push({...item});
-                }
-            }
-            
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
-            displayCartItems();
+            // ... existing updateQuantity function ...
         }
 
         function checkout() {
-            alert('Thank you for your purchase!');
-            localStorage.removeItem('cartItems');
-            displayCartItems();
+            // ... existing checkout function ...
         }
-
-        // Display cart items when page loads
-        displayCartItems();
     </script>
 </body>
 </html>
